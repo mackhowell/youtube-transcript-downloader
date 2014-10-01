@@ -33,7 +33,8 @@ def __init__(videoid):
 
     srt = soup.find_all('textarea')[1]
     cleanSrt = bleach.clean(srt, tags=[], strip=True)
-    print cleanSrt.prettify()
+    decodedString = cleanSrt.decode("utf-8").replace("&gt;", ">").encode("utf-8")
+
     
     # print cleanSrt
     # print "type is : "
@@ -41,7 +42,7 @@ def __init__(videoid):
 
     try:
       f = open(entry.media.title.text + '.srt', 'w') #format the same as youtube-dl formats .mp4 file
-      f.write(cleanSrt.encode('UTF-8'))
+      f.write(decodedString.encode('UTF-8'))
       f.close()
       print '...made srt file!!!'
     
