@@ -2,10 +2,11 @@ youtube-transcript-downloader
 =============================
 
 
-gets the interactive transcript for any youtube video
+steps to liberate your subtitles:
 
 
-- install python packages: urllib2, bleach, beautifulsoup4, gdata
-- $ python youtube-api-test.py <Video ID>
+1. install python packages: urllib2, bleach, beautifulsoup4
+
+2. $ python youtube-api-test.py < Video ID >
  
 
