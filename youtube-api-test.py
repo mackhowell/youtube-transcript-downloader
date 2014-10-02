@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
-import urllib
 import urllib2
-import urlparse
 import bleach
 from bs4 import BeautifulSoup
 import gdata.youtube
@@ -11,13 +9,10 @@ import gdata.youtube.service
 
 def __init__(videoid):
   
-  # GOOGLE STUFF
+  # GOOGLE STUFF NOT NECESSARY
   yt_service = gdata.youtube.service.YouTubeService()
-  # Turn on HTTPS/SSL access.
   yt_service.ssl = True
-  # API KEY
   yt_service.developer_key = 'AIzaSyBwWvdRZ-M5X51aizixHYk00_tu71f70WY'
-  # GET VID
   entry = yt_service.GetYouTubeVideoEntry(video_id = videoid)
   PrintEntryDetails(entry)
 
@@ -29,19 +24,17 @@ def __init__(videoid):
     # print "parse = " + parse
     html = urllib2.urlopen(url)
     soup = BeautifulSoup(html.read())
-    # parsed = list(urlparse.urlparse(url))
 
     srt = soup.find_all('textarea')[1]
     cleanSrt = bleach.clean(srt, tags=[], strip=True)
     decodedString = cleanSrt.decode("utf-8").replace("&gt;", ">").encode("utf-8")
-
     
     # print cleanSrt
     # print "type is : "
     # print type(cleanSrt)
 
     try:
-      f = open(entry.media.title.text + '.srt', 'w') #format the same as youtube-dl formats .mp4 file
+      f = open(entry.media.title.text + '-' + videoid + '.srt', 'w') #format the same as youtube-dl formats .mp4 file
       f.write(decodedString.encode('UTF-8'))
       f.close()
       print '...made srt file!!!'
