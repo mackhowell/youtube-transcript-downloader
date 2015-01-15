@@ -12,7 +12,7 @@ def __init__(videoid):
   # GOOGLE STUFF NOT NECESSARY
   yt_service = gdata.youtube.service.YouTubeService()
   yt_service.ssl = True
-  yt_service.developer_key = 'AIzaSyBwWvdRZ-M5X51aizixHYk00_tu71f70WY'
+  yt_service.developer_key = ''
   entry = yt_service.GetYouTubeVideoEntry(video_id = videoid)
   PrintEntryDetails(entry)
 
